@@ -1,5 +1,5 @@
 {
-    "name": "yavuz/filament-theme",
+    "name": "yavuz-dev/filament-theme",
     "description": "A panel theme for Filament: dark full-height sidebar, a top bar with breadcrumbs, search, quick create, pending work and user menu, and calmer tables, badges, cards and empty states.",
     "keywords": [
         "laravel",

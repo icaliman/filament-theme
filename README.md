@@ -32,7 +32,7 @@ A panel theme for [Filament](https://filamentphp.com) 5: a dark, full-height sid
 ## Installation
 
 ```bash
-composer require yavuz/filament-theme
+composer require yavuz-dev/filament-theme
 ```
 
 If your panel has no custom theme yet, create one:
@@ -46,12 +46,12 @@ Import the theme into the panel's theme file, after Filament's, and let Tailwind
 ```css
 /* resources/css/filament/admin/theme.css */
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
-@import '../../../../vendor/yavuz/filament-theme/resources/css/theme.css';
+@import '../../../../vendor/yavuz-dev/filament-theme/resources/css/theme.css';
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
-@source '../../../../vendor/yavuz/filament-theme/resources/views/**/*';
-@source '../../../../vendor/yavuz/filament-theme/src/**/*';
+@source '../../../../vendor/yavuz-dev/filament-theme/resources/views/**/*';
+@source '../../../../vendor/yavuz-dev/filament-theme/src/**/*';
 ```
 
 Register the plugin on the panel:

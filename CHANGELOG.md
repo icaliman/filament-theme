@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.2
+
+On small screens the top bar is a single row: the button that opens the sidebar moves into it, the trail gives way to the page heading below, the New button keeps only its plus and the avatar no longer gets squeezed.
+
 ## 1.2.1
 
 - A brand given as text (`brandName`, or a logo with text in it) reads in white on the dark sidebar.

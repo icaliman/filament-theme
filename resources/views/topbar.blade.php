@@ -8,6 +8,20 @@
 @endphp
 
 <header class="fi-theme-topbar">
+    @if (filament()->hasNavigation())
+        <x-filament::icon-button
+            color="gray"
+            icon="heroicon-o-bars-3"
+            icon-size="lg"
+            :label="__('filament-panels::layout.actions.sidebar.expand.label')"
+            x-data="{}"
+            aria-controls="fi-main-sidebar"
+            x-bind:aria-expanded="$store.sidebar.isOpen"
+            x-on:click="$store.sidebar.open($event.currentTarget)"
+            class="fi-theme-topbar-menu-btn"
+        />
+    @endif
+
     {{ FilamentView::renderHook(PanelsRenderHook::TOPBAR_START) }}
 
     <nav aria-label="{{ __('filament-theme::theme.topbar.breadcrumbs') }}" class="fi-theme-topbar-crumbs">
@@ -46,7 +60,9 @@
         @if ($createLinks)
             <x-filament::dropdown placement="bottom-end" teleport>
                 <x-slot name="trigger">
-                    <x-filament::button icon="heroicon-m-plus" size="sm">{{ __('filament-theme::theme.topbar.create') }}</x-filament::button>
+                    <x-filament::button icon="heroicon-m-plus" size="sm" class="fi-theme-topbar-create">
+                        <span class="fi-theme-topbar-create-label">{{ __('filament-theme::theme.topbar.create') }}</span>
+                    </x-filament::button>
                 </x-slot>
 
                 <x-filament::dropdown.list>

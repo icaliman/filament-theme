@@ -159,7 +159,16 @@
 
 /* Top bar over the content area: it spans the content's padding and stays put while the page scrolls. */
 .fi-theme-topbar {
-    @apply sticky top-0 z-20 -mx-4 flex h-14 items-center gap-x-4 border-b border-gray-200 bg-white/90 px-4 backdrop-blur md:-mx-6 md:px-6 lg:-mx-8 lg:px-8 dark:border-white/10 dark:bg-gray-900/90;
+    @apply sticky top-0 z-20 -mx-4 flex h-14 items-center gap-x-2 border-b border-gray-200 bg-white/90 px-4 backdrop-blur md:-mx-6 md:px-6 lg:-mx-8 lg:px-8 dark:border-white/10 dark:bg-gray-900/90 sm:gap-x-4;
+}
+
+/* On small screens the sidebar opens from the top bar; Filament's own button row above the page gives way to it. */
+.fi-theme-topbar-menu-btn {
+    @apply -ms-1.5 shrink-0 lg:hidden;
+}
+
+.fi-body:has(.fi-theme-topbar) > .fi-layout-sidebar-toggle-btn-ctn {
+    @apply max-lg:hidden;
 }
 
 .fi-theme-topbar-crumbs {
@@ -176,6 +185,11 @@
 
 .fi-theme-topbar-crumb-separator {
     @apply size-4 shrink-0 text-gray-300 dark:text-gray-600;
+}
+
+/* On small screens the page heading right below says where the user is; the trail would only be cut short. */
+.fi-theme-topbar-crumbs > * {
+    @apply max-sm:hidden;
 }
 
 .fi-theme-topbar-search {
@@ -195,7 +209,16 @@
 }
 
 .fi-theme-topbar-end {
-    @apply flex flex-1 items-center justify-end gap-x-3;
+    @apply flex flex-1 items-center justify-end gap-x-2 sm:gap-x-3;
+
+    & > * {
+        @apply shrink-0;
+    }
+}
+
+/* On small screens the New button keeps only its plus. */
+.fi-theme-topbar-create-label {
+    @apply max-sm:sr-only;
 }
 
 /* Bell: no negative margin, room on its right so a two-digit count clears the avatar. */

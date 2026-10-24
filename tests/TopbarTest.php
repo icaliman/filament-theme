@@ -22,7 +22,7 @@ class TopbarTest extends TestCase
         FilamentView::registerRenderHook(PanelsRenderHook::TOPBAR_END, fn (): string => 'hooked-end');
 
         Livewire::test(Topbar::class)
-            ->assertSeeInOrder(['hooked-start', 'hooked-before-search', 'hooked-after-search', 'Jane Doe', 'hooked-end']);
+            ->assertSeeInOrder(['fi-theme-topbar-menu-btn', 'hooked-start', 'hooked-before-search', 'hooked-after-search', 'Jane Doe', 'hooked-end']);
     }
 
     public function test_the_trail_names_a_sidebar_group_as_the_sidebar_does(): void

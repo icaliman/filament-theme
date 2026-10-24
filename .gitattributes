@@ -4,3 +4,6 @@
 /.gitignore export-ignore
 /phpunit.xml.dist export-ignore
 /CHANGELOG.md export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+/resources/css/compiled.css export-ignore

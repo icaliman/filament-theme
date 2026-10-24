@@ -24,6 +24,13 @@ jobs:
           extensions: intl, mbstring
           coverage: none
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Lets the tests check the shipped stylesheet against its sources.
+      - run: npm ci
+
       - run: composer update --prefer-dist --no-interaction --no-progress
 
       - run: vendor/bin/phpunit

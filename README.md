@@ -21,31 +21,14 @@ A panel theme for [Filament](https://filamentphp.com) 5: a dark, full-height sid
 ## Requirements
 
 - PHP 8.3+
-- Filament 5 with a [custom theme](https://filamentphp.com/docs/styling/overview#creating-a-custom-theme) (Tailwind CSS 4, Vite)
+- Filament 5
+
+The theme ships its stylesheet precompiled, so it needs no custom theme, Vite or npm build of its own.
 
 ## Installation
 
 ```bash
 composer require yavuz-dev/filament-theme
-```
-
-If your panel has no custom theme yet, create one:
-
-```bash
-php artisan make:filament-theme
-```
-
-Import the theme into the panel's theme file, after Filament's, and let Tailwind scan the package:
-
-```css
-/* resources/css/filament/admin/theme.css */
-@import '../../../../vendor/filament/filament/resources/css/theme.css';
-@import '../../../../vendor/yavuz-dev/filament-theme/resources/css/theme.css';
-
-@source '../../../../app/Filament/**/*';
-@source '../../../../resources/views/filament/**/*';
-@source '../../../../vendor/yavuz-dev/filament-theme/resources/views/**/*';
-@source '../../../../vendor/yavuz-dev/filament-theme/src/**/*';
 ```
 
 Register the plugin on the panel:
@@ -57,12 +40,21 @@ public function panel(Panel $panel): Panel
 {
     return $panel
         // ...
-        ->viteTheme('resources/css/filament/admin/theme.css')
         ->plugin(ThemePlugin::make());
 }
 ```
 
-Then build your assets with `npm run build`.
+Then publish the stylesheet with Filament's other assets. Filament's `filament:upgrade` script, which most apps run after `composer install` or `composer update`, does this too:
+
+```bash
+php artisan filament:assets
+```
+
+The stylesheet is linked only on panels that use the plugin, after the panel's own theme, so it works with or without a custom theme.
+
+### Upgrading from 1.0
+
+Version 1.0 was imported into a custom theme. Remove the theme's `@import` and its `vendor/yavuz-dev/filament-theme` `@source` lines from your theme file, run `php artisan filament:assets` and rebuild your assets; otherwise the styles load twice.
 
 ## Configuration
 
@@ -161,9 +153,13 @@ English and Turkish are included and follow the app's locale. To change a text, 
 php artisan vendor:publish --tag=filament-theme-translations
 ```
 
-## Testing
+## Development
+
+After changing the styles or views, rebuild the precompiled stylesheet and run the tests:
 
 ```bash
+npm ci
+npm run build
 composer test
 ```
 

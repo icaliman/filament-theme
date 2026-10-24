@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+The stylesheet now comes precompiled and is linked on the panels that use the plugin, so apps need no custom theme, Vite or npm build for it. Publish it with `php artisan filament:assets`. If you imported the theme into a custom theme in 1.0, remove that `@import` and the package's `@source` lines.
+
 ## 1.0.2
 
 The README no longer carries screenshots; the code is the same as 1.0.1.

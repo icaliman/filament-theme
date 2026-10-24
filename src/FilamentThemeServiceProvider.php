@@ -3,6 +3,8 @@
 namespace Yavuz\FilamentTheme;
 
 use Filament\Actions\CreateAction;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -19,6 +21,11 @@ class FilamentThemeServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'filament-theme');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-theme');
         $this->publishes([__DIR__.'/../resources/lang' => $this->app->langPath('vendor/filament-theme')], 'filament-theme-translations');
+
+        // Precompiled, so apps need no Vite theme of their own; `php artisan filament:assets` publishes it and the plugin links it on its panels.
+        FilamentAsset::register([
+            Css::make('filament-theme', __DIR__.'/../resources/dist/filament-theme.css')->loadedOnRequest(),
+        ], package: ThemePlugin::PACKAGE);
 
         Livewire::component('filament-theme.topbar', Topbar::class);
         Livewire::component('filament-theme.pending-work-bell', PendingWorkBell::class);

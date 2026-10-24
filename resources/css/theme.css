@@ -325,7 +325,7 @@
 /* A thin scrollbar that suits the dark sidebar; hidden when collapsed, where it would push the icons off centre. */
 .fi-sidebar-nav {
     scrollbar-width: thin;
-    scrollbar-color: --alpha(var(--color-white) / 15%) transparent;
+    scrollbar-color: rgb(255 255 255 / 0.15) transparent;
 }
 
 .fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav {

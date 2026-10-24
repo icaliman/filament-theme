@@ -9,18 +9,23 @@ use Filament\Enums\GlobalSearchPosition;
 use Filament\Enums\UserMenuPosition;
 use Filament\Facades\Filament;
 use Filament\Panel;
+use Filament\Support\Facades\FilamentAsset;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\HtmlString;
 
 /**
  * The panel theme: dark sidebar headed by the brand, a top bar over the content (trail, search, quick create,
  * pending work and user menu), record counts under list headings, empty states and an optional login aside.
  *
- * The stylesheet is not loaded from here: import resources/css/theme.css into the panel's Vite theme.
+ * Its stylesheet comes precompiled and is linked on the panels that use the plugin.
  */
 class ThemePlugin implements Plugin
 {
+    public const PACKAGE = 'yavuz-dev/filament-theme';
+
     protected ?array $sidebarColor = null;
 
     protected bool $hasTopbar = true;
@@ -185,6 +190,7 @@ class ThemePlugin implements Plugin
             $panel->colors(['sidebar' => $this->sidebarColor]);
         }
 
+        $panel->renderHook(PanelsRenderHook::STYLES_AFTER, fn (): Htmlable => new HtmlString('<link rel="stylesheet" href="'.e(FilamentAsset::getStyleHref('filament-theme', self::PACKAGE)).'">'));
         $panel->renderHook(PanelsRenderHook::BODY_END, fn (): View => view('filament-theme::search-modal'));
 
         if ($this->hasTopbar) {

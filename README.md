@@ -2,8 +2,6 @@
 
 A panel theme for [Filament](https://filamentphp.com) 5: a dark, full-height sidebar headed by your brand, a top bar over the content, and calmer tables, badges, cards and empty states. Accents follow your panel's primary colour, so the theme takes on each app's brand.
 
-![The inspections list with the sidebar, top bar, tabs and status badges](docs/screenshots/list.png)
-
 ## Features
 
 - **Sidebar** in a dark shade of your brand colour (or a colour of its own), with the brand at its head and the collapse control beside it.
@@ -19,10 +17,6 @@ A panel theme for [Filament](https://filamentphp.com) 5: a dark, full-height sid
 - **Login aside**: an optional brand panel beside the login form on large screens.
 - **Helpers**: `statusBadge()` and `limitWithTooltip()` columns, a `#` row-number column, tooltips on yes/no icons, a plus on create buttons, a brand mark and an activity timeline view.
 - English and Turkish included.
-
-| Search | User menu | Activity timeline |
-| --- | --- | --- |
-| ![Search modal](docs/screenshots/search.png) | ![User menu](docs/screenshots/user-menu.png) | ![Activity timeline](docs/screenshots/timeline.png) |
 
 ## Requirements
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+The README no longer carries screenshots; the code is the same as 1.0.1.
+
 ## 1.0.1
 
 Published on Packagist as `yavuz-dev/filament-theme`; the PHP namespace stays `Yavuz\FilamentTheme`. Update the CSS import and `@source` paths to `vendor/yavuz-dev/filament-theme`.

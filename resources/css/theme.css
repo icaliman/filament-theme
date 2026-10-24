@@ -196,6 +196,11 @@
     @apply hidden w-64 items-center gap-x-2 rounded-lg bg-white px-3 py-1.5 text-sm text-gray-400 ring-1 ring-gray-950/10 transition outline-none hover:ring-gray-950/20 focus-visible:ring-2 focus-visible:ring-primary-600 sm:flex lg:w-80 dark:bg-white/5 dark:text-gray-500 dark:ring-white/10;
 }
 
+/* On small screens search is a magnifier that opens the same search window. */
+.fi-theme-topbar-search-btn {
+    @apply shrink-0 sm:hidden;
+}
+
 .fi-theme-topbar-search-icon {
     @apply size-5 shrink-0;
 }

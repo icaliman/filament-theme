@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+
+On small screens, where the search box has no room, a magnifier in the top bar opens the same search window.
+
 ## 1.2.2
 
 On small screens the top bar is a single row: the button that opens the sidebar moves into it, the trail gives way to the page heading below, the New button keeps only its plus and the avatar no longer gets squeezed.

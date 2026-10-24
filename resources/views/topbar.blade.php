@@ -41,6 +41,16 @@
     {{ FilamentView::renderHook(PanelsRenderHook::GLOBAL_SEARCH_BEFORE) }}
 
     @if (filament()->isGlobalSearchEnabled())
+        <x-filament::icon-button
+            color="gray"
+            icon="heroicon-o-magnifying-glass"
+            icon-size="lg"
+            :label="__('filament-theme::theme.topbar.search')"
+            x-data="{}"
+            x-on:click="$dispatch('open-modal', { id: 'global-search' })"
+            class="fi-theme-topbar-search-btn"
+        />
+
         <button
             type="button"
             x-data="{}"

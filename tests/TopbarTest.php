@@ -24,4 +24,13 @@ class TopbarTest extends TestCase
         Livewire::test(Topbar::class)
             ->assertSeeInOrder(['hooked-start', 'hooked-before-search', 'hooked-after-search', 'Jane Doe', 'hooked-end']);
     }
+
+    public function test_the_trail_names_a_sidebar_group_as_the_sidebar_does(): void
+    {
+        Filament::setCurrentPanel(Filament::getPanel('themed'));
+
+        $this->assertSame('Work orders', Topbar::navigationGroupLabel('service'));
+        $this->assertSame('Customers', Topbar::navigationGroupLabel('Customers'));
+        $this->assertSame('Reports', Topbar::navigationGroupLabel('Reports'));
+    }
 }

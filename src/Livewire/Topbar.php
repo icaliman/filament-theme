@@ -2,8 +2,12 @@
 
 namespace Yavuz\FilamentTheme\Livewire;
 
+use BackedEnum;
 use Filament\Livewire\Topbar as FilamentTopbar;
+use Filament\Navigation\NavigationGroup;
+use Filament\Support\Contracts\HasLabel;
 use Illuminate\Contracts\View\View;
+use UnitEnum;
 use Yavuz\FilamentTheme\ThemePlugin;
 
 /**
@@ -19,6 +23,29 @@ class Topbar extends FilamentTopbar
      * @var array<int, array{url: ?string, label: string}>
      */
     public array $breadcrumbs = [];
+
+    /**
+     * The name of a sidebar group as the sidebar shows it: the label the panel registered for its key,
+     * else the enum's label, else the group itself.
+     */
+    public static function navigationGroupLabel(string|UnitEnum $group): string
+    {
+        $key = match (true) {
+            $group instanceof BackedEnum => $group->value,
+            $group instanceof UnitEnum => $group->name,
+            default => $group,
+        };
+        $registered = filament()->getCurrentOrDefaultPanel()->getNavigationGroups()[$key] ?? null;
+
+        $label = match (true) {
+            $registered instanceof NavigationGroup => $registered->getLabel() ?? $key,
+            is_string($registered) => $registered,
+            $group instanceof HasLabel => $group->getLabel(),
+            default => $key,
+        };
+
+        return strip_tags((string) $label);
+    }
 
     public function render(): View
     {

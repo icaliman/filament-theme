@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+
+- A brand given as text (`brandName`, or a logo with text in it) reads in white on the dark sidebar.
+- The trail names a sidebar group by the label the panel registered for it, not by its key.
+
 ## 1.2.0
 
 The top bar renders Filament's `TOPBAR_START`, `GLOBAL_SEARCH_BEFORE`, `GLOBAL_SEARCH_AFTER` and `TOPBAR_END` hooks, so what an app hangs there, such as a switcher beside the search, stays in view.

@@ -16,7 +16,7 @@
     // Lead with the sidebar group the page sits in, as the sidebar shows it.
     $navigation = method_exists($page, 'getResource') ? $page::getResource() : $page::class;
     if (filled($group = $navigation::getNavigationGroup())) {
-        $breadcrumbs->prepend(['url' => null, 'label' => $label($group)]);
+        $breadcrumbs->prepend(['url' => null, 'label' => \Yavuz\FilamentTheme\Livewire\Topbar::navigationGroupLabel($group)]);
     }
 
     // A page named like its sidebar group ("Müşteriler › Müşteriler") reads as one step.

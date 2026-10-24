@@ -1,0 +1,574 @@
+/*
+ * Panel theme: a dark sidebar, a top bar over the content, quieter tables and cards.
+ *
+ * Import it after Filament's theme. Accents follow the panel's primary colour; the sidebar follows a
+ * "sidebar" colour when the panel registers one (ThemePlugin::sidebarColor()), else the primary.
+ */
+
+@theme inline {
+    --color-sidebar-50: var(--sidebar-50, var(--primary-50));
+    --color-sidebar-100: var(--sidebar-100, var(--primary-100));
+    --color-sidebar-200: var(--sidebar-200, var(--primary-200));
+    --color-sidebar-300: var(--sidebar-300, var(--primary-300));
+    --color-sidebar-400: var(--sidebar-400, var(--primary-400));
+    --color-sidebar-500: var(--sidebar-500, var(--primary-500));
+    --color-sidebar-600: var(--sidebar-600, var(--primary-600));
+    --color-sidebar-700: var(--sidebar-700, var(--primary-700));
+    --color-sidebar-800: var(--sidebar-800, var(--primary-800));
+    --color-sidebar-900: var(--sidebar-900, var(--primary-900));
+    --color-sidebar-950: var(--sidebar-950, var(--primary-950));
+}
+
+/* Dark, branded sidebar so navigation reads apart from the content area. */
+.fi-sidebar {
+    @apply bg-sidebar-950 lg:bg-sidebar-950 dark:bg-gray-950 dark:lg:bg-gray-950;
+
+    & .fi-sidebar-header-controls {
+        @apply after:border-white/10;
+    }
+
+    & .fi-tenant-menu-trigger {
+        @apply bg-white/5 ring-1 ring-white/10 hover:bg-white/10 focus-visible:bg-white/10;
+
+        & .fi-icon {
+            @apply text-sidebar-200/60 group-hover:text-sidebar-100;
+        }
+    }
+
+    & .fi-tenant-menu-trigger-current-tenant-label {
+        @apply text-sidebar-200/60;
+    }
+
+    & .fi-tenant-menu-trigger-tenant-name {
+        @apply text-white;
+    }
+
+    & .fi-sidebar-footer {
+        @apply border-white/10;
+    }
+}
+
+.fi-sidebar-group-label {
+    @apply text-[0.6875rem] font-semibold tracking-wider text-sidebar-200/75 uppercase;
+}
+
+.fi-sidebar-group-btn .fi-icon,
+.fi-sidebar-group-btn .fi-icon-btn {
+    @apply text-sidebar-200/50 hover:text-sidebar-100;
+}
+
+.fi-sidebar-item-label {
+    @apply text-sidebar-50/85 dark:text-gray-200;
+}
+
+.fi-sidebar-item-btn > .fi-icon {
+    @apply text-sidebar-200/60 dark:text-gray-500;
+}
+
+.fi-sidebar-item {
+    &.fi-sidebar-item-has-url > .fi-sidebar-item-btn {
+        @apply hover:bg-white/10 focus-visible:bg-white/10;
+    }
+
+    &.fi-active > .fi-sidebar-item-btn {
+        @apply bg-sidebar-400/20 dark:bg-white/10;
+
+        & > .fi-icon {
+            @apply text-sidebar-300 dark:text-primary-400;
+        }
+
+        & > .fi-sidebar-item-label {
+            @apply font-semibold text-white dark:text-white;
+        }
+    }
+}
+
+.fi-sidebar-group-dropdown-trigger-btn {
+    @apply hover:bg-white/10 focus-visible:bg-white/10;
+
+    & .fi-icon {
+        @apply text-sidebar-200/60;
+    }
+}
+
+/* Brand mark; also used on the light login page, so colours only flip inside the sidebar. */
+.fi-theme-brand {
+    @apply flex items-center gap-x-3;
+}
+
+.fi-theme-brand-mark {
+    @apply flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-600 text-white shadow-sm;
+}
+
+.fi-theme-brand-text {
+    @apply flex flex-col leading-tight;
+}
+
+.fi-theme-brand-name {
+    @apply text-lg font-bold tracking-tight text-gray-950 dark:text-white;
+}
+
+.fi-theme-brand-tagline {
+    @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+}
+
+.fi-sidebar {
+    & .fi-sidebar-header {
+        @apply h-auto px-5 pt-6 pb-2;
+
+        & .fi-logo {
+            @apply ms-0;
+        }
+    }
+
+    /* Logo first, the collapse control at the far end of the header. */
+    & .fi-sidebar-header-logo-ctn {
+        @apply order-1 me-auto;
+    }
+
+    & .fi-sidebar-close-collapse-sidebar-btn {
+        @apply order-2;
+    }
+
+    & .fi-theme-brand-name {
+        @apply text-white;
+    }
+
+    & .fi-theme-brand-tagline {
+        @apply text-sidebar-200/70;
+    }
+
+    /* Panels that keep the user menu at the foot of the sidebar. */
+    & .fi-user-menu-trigger {
+        @apply hover:bg-white/10 focus-visible:bg-white/10;
+
+        & .fi-icon {
+            @apply text-sidebar-200/60;
+        }
+
+        & .fi-user-menu-trigger-text {
+            @apply truncate text-sidebar-50;
+        }
+    }
+}
+
+.fi-sidebar-open-collapse-sidebar-btn,
+.fi-sidebar-close-collapse-sidebar-btn {
+    @apply text-sidebar-200/70 hover:text-white;
+}
+
+/* Top bar over the content area: it spans the content's padding and stays put while the page scrolls. */
+.fi-theme-topbar {
+    @apply sticky top-0 z-20 -mx-4 flex h-14 items-center gap-x-4 border-b border-gray-200 bg-white/90 px-4 backdrop-blur md:-mx-6 md:px-6 lg:-mx-8 lg:px-8 dark:border-white/10 dark:bg-gray-900/90;
+}
+
+.fi-theme-topbar-crumbs {
+    @apply flex min-w-0 flex-1 items-center gap-x-1.5 text-sm;
+}
+
+.fi-theme-topbar-crumb {
+    @apply truncate text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200;
+
+    &.fi-theme-topbar-crumb-current {
+        @apply font-medium text-gray-950 hover:text-gray-950 dark:text-white;
+    }
+}
+
+.fi-theme-topbar-crumb-separator {
+    @apply size-4 shrink-0 text-gray-300 dark:text-gray-600;
+}
+
+.fi-theme-topbar-search {
+    @apply hidden w-64 items-center gap-x-2 rounded-lg bg-white px-3 py-1.5 text-sm text-gray-400 ring-1 ring-gray-950/10 transition outline-none hover:ring-gray-950/20 focus-visible:ring-2 focus-visible:ring-primary-600 sm:flex lg:w-80 dark:bg-white/5 dark:text-gray-500 dark:ring-white/10;
+}
+
+.fi-theme-topbar-search-icon {
+    @apply size-5 shrink-0;
+}
+
+.fi-theme-topbar-search-label {
+    @apply flex-1 text-start;
+}
+
+.fi-theme-topbar-search-shortcut {
+    @apply rounded-md px-1.5 py-0.5 font-sans text-xs font-medium ring-1 ring-gray-950/10 dark:ring-white/10;
+}
+
+.fi-theme-topbar-end {
+    @apply flex flex-1 items-center justify-end gap-x-3;
+}
+
+/* Bell: no negative margin, room on its right so a two-digit count clears the avatar. */
+.fi-theme-topbar-bell {
+    @apply m-0 me-3;
+
+    & > .fi-icon-btn-badge-ctn .fi-badge {
+        @apply rounded-full px-1.5;
+    }
+}
+
+.fi-theme-topbar-pending-heading {
+    @apply border-b border-gray-100 px-4 py-2.5 text-xs font-semibold tracking-wide text-gray-500 uppercase dark:border-white/5 dark:text-gray-400;
+}
+
+.fi-theme-topbar-pending-empty {
+    @apply px-4 py-6 text-center text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* The page header no longer needs its own top gap under the bar. */
+.fi-theme-topbar + .fi-page-header-main-ctn {
+    @apply pt-6;
+}
+
+.fi-theme-search-modal {
+    & .fi-modal-close-overlay {
+        @apply bg-gray-950/40 backdrop-blur-sm dark:bg-gray-950/70;
+    }
+
+    /* Pinned near the top so the field stays put while results grow and shrink. */
+    &.fi-modal > .fi-modal-window-ctn {
+        @apply grid-rows-[0_auto_1fr] pt-[12vh] sm:grid-rows-[0_auto_1fr];
+    }
+
+    & .fi-modal-window {
+        @apply overflow-hidden rounded-2xl shadow-2xl ring-1 ring-gray-950/5 dark:ring-white/10;
+    }
+
+    & .fi-modal-header {
+        @apply hidden;
+    }
+
+    & .fi-modal-content {
+        @apply gap-0 p-0!;
+    }
+
+    & .fi-global-search-ctn {
+        @apply block;
+    }
+
+    /* A large, borderless field across the top of the window. */
+    & .fi-global-search-field {
+        @apply border-b border-gray-200 px-3 py-2 dark:border-white/10;
+
+        & .fi-input-wrp {
+            @apply bg-transparent shadow-none ring-0 dark:bg-transparent;
+        }
+
+        & .fi-input-wrp-prefix .fi-icon {
+            @apply size-6 text-primary-600 dark:text-primary-400;
+        }
+
+        & .fi-input {
+            @apply py-3 text-lg placeholder:text-gray-400;
+        }
+    }
+
+    & .fi-global-search-results-ctn {
+        @apply static mt-0 max-h-[55vh] rounded-none bg-transparent p-2 shadow-none ring-0 dark:bg-transparent;
+    }
+
+    & .fi-global-search-results,
+    & .fi-global-search-result-group-results {
+        @apply divide-y-0;
+    }
+
+    & .fi-global-search-result-group + .fi-global-search-result-group {
+        @apply mt-2;
+    }
+
+    & .fi-global-search-result-group-header {
+        @apply static border-0 bg-transparent px-3 pt-2 pb-1 text-xs font-semibold tracking-wider text-gray-500 normal-case uppercase dark:bg-transparent dark:text-gray-400;
+    }
+
+    & .fi-global-search-result {
+        @apply rounded-lg focus-within:bg-primary-50 hover:bg-primary-50 dark:focus-within:bg-white/5 dark:hover:bg-white/5;
+    }
+
+    & .fi-global-search-result-link {
+        @apply px-3 py-2.5 outline-none;
+    }
+
+    & .fi-global-search-result-heading {
+        @apply font-medium;
+    }
+
+    /* Details on one line, separated by dots, instead of one per row. */
+    & .fi-global-search-result-details {
+        @apply mt-0.5 flex flex-wrap gap-x-1.5;
+    }
+
+    & .fi-global-search-result-detail {
+        @apply flex gap-x-1;
+
+        & + .fi-global-search-result-detail::before {
+            @apply text-gray-300 content-['·'] dark:text-gray-600;
+        }
+    }
+
+    & .fi-global-search-result-detail-label {
+        @apply hidden;
+    }
+
+    & .fi-global-search-no-results-message {
+        @apply py-10 text-center;
+    }
+}
+
+.fi-theme-search-modal-footer {
+    @apply flex items-center gap-x-4 border-t border-gray-200 bg-gray-50 px-4 py-2.5 text-xs text-gray-500 dark:border-white/10 dark:bg-white/5 dark:text-gray-400;
+
+    & kbd {
+        @apply me-1 inline-flex min-w-5 items-center justify-center rounded border border-gray-200 bg-white px-1 font-sans text-[0.6875rem] font-medium text-gray-600 shadow-xs dark:border-white/10 dark:bg-white/10 dark:text-gray-300;
+    }
+}
+
+/* A thin scrollbar that suits the dark sidebar; hidden when collapsed, where it would push the icons off centre. */
+.fi-sidebar-nav {
+    scrollbar-width: thin;
+    scrollbar-color: --alpha(var(--color-white) / 15%) transparent;
+}
+
+.fi-sidebar:not(.fi-sidebar-open) .fi-sidebar-nav {
+    @apply lg:[scrollbar-gutter:auto] lg:[scrollbar-width:none];
+}
+
+/* Tables: a quiet header band, lighter row lines and a soft hover. */
+.fi-ta-ctn {
+    @apply rounded-2xl;
+}
+
+.fi-ta-table {
+    & > thead > tr {
+        @apply bg-gray-50/80 dark:bg-white/[0.03];
+    }
+
+    & > tbody {
+        @apply divide-gray-100 dark:divide-white/5;
+
+        & > tr {
+            @apply transition-colors duration-75 hover:bg-gray-50/70 dark:hover:bg-white/[0.02];
+        }
+    }
+}
+
+.fi-ta-header-cell {
+    @apply py-2.5 text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400;
+
+    & .fi-ta-header-cell-sort-btn {
+        @apply text-gray-500 dark:text-gray-400;
+    }
+}
+
+/* Secondary lines under a cell's main value. */
+.fi-ta-text > .fi-ta-text-description {
+    @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+/* Badges in tables are pills; state badges lead with a dot in their own colour. */
+.fi-ta-cell .fi-badge {
+    @apply rounded-full px-2.5;
+}
+
+.fi-theme-status .fi-badge::before {
+    @apply size-1.5 shrink-0 rounded-full bg-current content-[''];
+}
+
+/* Cards: rounder corners and a soft shadow in place of the hard outline. */
+.fi-section:not(.fi-section-not-contained),
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat {
+    @apply rounded-2xl shadow-[0_1px_2px_rgb(16_24_40/0.04),0_1px_3px_rgb(16_24_40/0.06)] ring-gray-950/[0.04] dark:shadow-none dark:ring-white/10;
+}
+
+/* Record count under a list page's heading. */
+.fi-theme-record-count {
+    @apply mt-1 text-sm text-gray-500 dark:text-gray-400;
+}
+
+/* Empty tables: the resource icon on a tinted disc. */
+.fi-ta-empty-state-icon-bg {
+    @apply bg-primary-50 dark:bg-primary-500/10;
+
+    & .fi-icon {
+        @apply text-primary-600 dark:text-primary-400;
+    }
+}
+
+/* Login: a night-blue brand panel beside the form from large screens up. */
+.fi-simple-layout:has(> .fi-theme-login-aside) {
+    @apply lg:flex-row lg:items-stretch;
+
+    & > .fi-simple-main-ctn {
+        @apply bg-white lg:w-1/2 dark:bg-gray-900;
+    }
+
+    & .fi-simple-main {
+        @apply shadow-none ring-0;
+    }
+}
+
+.fi-theme-login-aside {
+    @apply hidden flex-col justify-between bg-sidebar-950 p-12 text-white lg:flex lg:w-1/2 xl:p-16;
+
+    & .fi-theme-brand-name {
+        @apply text-white;
+    }
+
+    & .fi-theme-brand-tagline {
+        @apply text-sidebar-200/70;
+    }
+}
+
+.fi-theme-login-aside-body {
+    @apply max-w-md;
+}
+
+.fi-theme-login-aside-heading {
+    @apply text-3xl leading-tight font-semibold tracking-tight text-white xl:text-4xl;
+}
+
+.fi-theme-login-aside-points {
+    @apply mt-10 space-y-5 text-sidebar-100/85;
+
+    & li {
+        @apply flex items-start gap-x-3;
+    }
+}
+
+.fi-theme-login-aside-point-icon {
+    @apply mt-0.5 size-5 shrink-0 text-sidebar-300;
+}
+
+.fi-theme-login-aside-footer {
+    @apply text-sm text-sidebar-200/60;
+}
+
+/* User menu: avatar with name and role in the bar; a card with identity, organization, theme and sign-out. */
+.fi-theme-user-menu-trigger {
+    @apply flex items-center gap-x-2.5 rounded-lg py-1 ps-1 pe-2 transition outline-none hover:bg-gray-950/5 focus-visible:ring-2 focus-visible:ring-primary-600 dark:hover:bg-white/5;
+
+    & .fi-avatar {
+        @apply size-8;
+    }
+}
+
+.fi-theme-user-menu-trigger-text {
+    @apply hidden max-w-40 min-w-0 flex-col text-start leading-tight lg:flex;
+
+    & .fi-theme-user-menu-name {
+        @apply truncate text-sm font-medium whitespace-nowrap text-gray-950 dark:text-white;
+    }
+}
+
+.fi-theme-user-menu-role {
+    @apply truncate text-xs whitespace-nowrap text-gray-500 dark:text-gray-400;
+}
+
+.fi-theme-user-menu-chevron {
+    @apply hidden size-4 text-gray-400 lg:block;
+}
+
+.fi-theme-user-menu-header {
+    @apply flex items-center gap-x-3 px-4 pt-4 pb-3;
+
+    & .fi-avatar {
+        @apply size-11;
+    }
+}
+
+.fi-theme-user-menu-identity {
+    @apply min-w-0;
+
+    & .fi-theme-user-menu-name {
+        @apply truncate text-sm font-semibold text-gray-950 dark:text-white;
+    }
+}
+
+.fi-theme-user-menu-email {
+    @apply truncate text-xs text-gray-500 dark:text-gray-400;
+}
+
+.fi-theme-user-menu-membership {
+    @apply mx-4 mb-3 flex items-start gap-x-2 rounded-lg bg-gray-50 px-3 py-2 text-gray-500 dark:bg-white/5 dark:text-gray-400;
+}
+
+.fi-theme-user-menu-organization {
+    @apply text-xs font-medium text-gray-700 dark:text-gray-300;
+}
+
+.fi-theme-user-menu-role-badge {
+    @apply mt-1.5 w-fit;
+}
+
+.fi-theme-user-menu-theme {
+    @apply flex items-center justify-between gap-x-3 border-t border-gray-100 px-4 py-2.5 dark:border-white/5;
+
+    & .fi-theme-switcher {
+        @apply p-0;
+    }
+}
+
+.fi-theme-user-menu-section-label {
+    @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+}
+
+.fi-theme-user-menu-actions {
+    @apply border-t border-gray-100 dark:border-white/5;
+}
+
+/* Activity timeline: a coloured marker per step on a thin rail, newest first. */
+.fi-theme-activity {
+    @apply relative space-y-5;
+
+    &::before {
+        @apply absolute start-3.5 top-2 bottom-2 w-px bg-gray-200 content-[''] dark:bg-white/10;
+    }
+}
+
+.fi-theme-activity-item {
+    @apply relative flex gap-x-3;
+}
+
+.fi-theme-activity-icon {
+    @apply relative z-[1] flex size-7 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 ring-4 ring-white dark:bg-gray-800 dark:text-gray-400 dark:ring-gray-900;
+
+    &.fi-color-success {
+        @apply bg-success-50 text-success-600 dark:bg-success-500/10 dark:text-success-400;
+    }
+
+    &.fi-color-warning {
+        @apply bg-warning-50 text-warning-600 dark:bg-warning-500/10 dark:text-warning-400;
+    }
+
+    &.fi-color-danger {
+        @apply bg-danger-50 text-danger-600 dark:bg-danger-500/10 dark:text-danger-400;
+    }
+
+    &.fi-color-info {
+        @apply bg-info-50 text-info-600 dark:bg-info-500/10 dark:text-info-400;
+    }
+}
+
+.fi-theme-activity-body {
+    @apply min-w-0 pt-0.5;
+}
+
+.fi-theme-activity-title {
+    @apply text-sm text-gray-700 dark:text-gray-300;
+}
+
+.fi-theme-activity-actor {
+    @apply font-semibold text-gray-950 dark:text-white;
+}
+
+.fi-theme-activity-time {
+    @apply text-xs text-gray-500 dark:text-gray-400;
+}
+
+.fi-theme-activity-note {
+    @apply mt-2 rounded-lg border-s-2 border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-700 dark:border-white/20 dark:bg-white/5 dark:text-gray-300;
+}
+
+.fi-theme-activity-empty {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+}

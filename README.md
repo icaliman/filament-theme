@@ -101,7 +101,7 @@ $panel
 | `withoutRecordCounts()` | Leaves out the record count under list headings. |
 | `withoutEmptyStates()` | Keeps Filament's own empty states. |
 
-The theme turns off Filament's own top bar and breadcrumbs, and sets the global search shortcut to <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd>.
+The theme turns off Filament's own top bar and breadcrumbs, and sets the global search shortcut to <kbd>⌘K</kbd> / <kbd>Ctrl K</kbd>. What the app puts in Filament's top bar through the `TOPBAR_START`, `GLOBAL_SEARCH_BEFORE`, `GLOBAL_SEARCH_AFTER` and `TOPBAR_END` render hooks shows in the theme's top bar instead.
 
 ## Helpers
 

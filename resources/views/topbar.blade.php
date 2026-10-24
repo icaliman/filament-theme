@@ -1,11 +1,15 @@
 @php
     use Filament\Support\Enums\Platform;
+    use Filament\Support\Facades\FilamentView;
+    use Filament\View\PanelsRenderHook;
 
     $shortcut = Platform::detect() === Platform::Mac ? '⌘K' : 'Ctrl K';
     $keyBindings = collect(filament()->getGlobalSearchKeyBindings())->map(fn (string $keyBinding): string => str_replace('+', '-', $keyBinding))->implode('.');
 @endphp
 
 <header class="fi-theme-topbar">
+    {{ FilamentView::renderHook(PanelsRenderHook::TOPBAR_START) }}
+
     <nav aria-label="{{ __('filament-theme::theme.topbar.breadcrumbs') }}" class="fi-theme-topbar-crumbs">
         @foreach ($breadcrumbs as $crumb)
             @if (! $loop->first)
@@ -20,6 +24,8 @@
         @endforeach
     </nav>
 
+    {{ FilamentView::renderHook(PanelsRenderHook::GLOBAL_SEARCH_BEFORE) }}
+
     @if (filament()->isGlobalSearchEnabled())
         <button
             type="button"
@@ -33,6 +39,8 @@
             <kbd class="fi-theme-topbar-search-shortcut">{{ $shortcut }}</kbd>
         </button>
     @endif
+
+    {{ FilamentView::renderHook(PanelsRenderHook::GLOBAL_SEARCH_AFTER) }}
 
     <div class="fi-theme-topbar-end">
         @if ($createLinks)
@@ -109,4 +117,6 @@
             </x-filament::dropdown>
         @endif
     </div>
+
+    {{ FilamentView::renderHook(PanelsRenderHook::TOPBAR_END) }}
 </header>

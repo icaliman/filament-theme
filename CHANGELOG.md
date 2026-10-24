@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+The top bar renders Filament's `TOPBAR_START`, `GLOBAL_SEARCH_BEFORE`, `GLOBAL_SEARCH_AFTER` and `TOPBAR_END` hooks, so what an app hangs there, such as a switcher beside the search, stays in view.
+
 ## 1.1.0
 
 The stylesheet now comes precompiled and is linked on the panels that use the plugin, so apps need no custom theme, Vite or npm build for it. Publish it with `php artisan filament:assets`. If you imported the theme into a custom theme in 1.0, remove that `@import` and the package's `@source` lines.
